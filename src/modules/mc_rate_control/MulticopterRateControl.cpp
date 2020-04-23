@@ -274,13 +274,49 @@ MulticopterRateControl::Run()
 			_controller_status_pub.publish(rate_ctrl_status);
 
 			// publish actuator controls
+			// actuator_controls_s actuators{};
+			// actuators.control[actuator_controls_s::INDEX_ROLL] = PX4_ISFINITE(att_control(0)) ? att_control(0) : 0.0f;
+			// actuators.control[actuator_controls_s::INDEX_PITCH] = PX4_ISFINITE(att_control(1)) ? att_control(1) : 0.0f;
+			// actuators.control[actuator_controls_s::INDEX_YAW] = PX4_ISFINITE(att_control(2)) ? att_control(2) : 0.0f;
+			// actuators.control[actuator_controls_s::INDEX_THROTTLE] = PX4_ISFINITE(_thrust_sp) ? _thrust_sp : 0.0f;
+			// actuators.control[actuator_controls_s::INDEX_LANDING_GEAR] = (float)_landing_gear.landing_gear;
+			// actuators.timestamp_sample = angular_velocity.timestamp_sample;
+
+			// Jeremy Chang publish actuator controls
+
+			float Jeremy_M[4] = {0,0,0,0}; //(4 motor)
+			float Jeremy_U[4] = {att_control(0),att_control(1),att_control(2),_thrust_sp}; //(r,p,y,t)
+
+			float Jeremy_QuadX[4][4] = {
+				{-0.5, 0.5, 0.5, 1},		//RF CCW 1
+				{ 0.5,-0.5, 0.5, 1},		//LB CCW 2
+				{ 0.5, 0.5,-0.5, 1},		//LF CW  3
+				{-0.5,-0.5,-0.5, 1}		//RB CW  4
+			};
+			// int Jeremy_QuadPlus[4][4] = {
+			// 	{-1, 0, 1, 1},			//Right CCW
+			// 	{ 1, 0, 1, 1},			//Left  CCW
+			// 	{ 0, 1,-1, 1},			//Front CW
+			// 	{ 0,-1,-1, 1}			//Rear  CW
+			// };
+			for (int i = 0; i < 4; i++){
+				 Jeremy_M[i] = {Jeremy_QuadX[i][0]*Jeremy_U[0] + Jeremy_QuadX[i][1]*Jeremy_U[1]
+				 	      + Jeremy_QuadX[i][2]*Jeremy_U[2] + Jeremy_QuadX[i][3]*Jeremy_U[3]};
+			}
+
+			// publish actuator controls  0~7
 			actuator_controls_s actuators{};
-			actuators.control[actuator_controls_s::INDEX_ROLL] = PX4_ISFINITE(att_control(0)) ? att_control(0) : 0.0f;
-			actuators.control[actuator_controls_s::INDEX_PITCH] = PX4_ISFINITE(att_control(1)) ? att_control(1) : 0.0f;
-			actuators.control[actuator_controls_s::INDEX_YAW] = PX4_ISFINITE(att_control(2)) ? att_control(2) : 0.0f;
-			actuators.control[actuator_controls_s::INDEX_THROTTLE] = PX4_ISFINITE(_thrust_sp) ? _thrust_sp : 0.0f;
-			actuators.control[actuator_controls_s::INDEX_LANDING_GEAR] = (float)_landing_gear.landing_gear;
+			actuators.control[actuator_controls_s::INDEX_ROLL] = PX4_ISFINITE(Jeremy_U[0]) ? Jeremy_U[0] : 0.0f;
+			actuators.control[actuator_controls_s::INDEX_PITCH] = PX4_ISFINITE(Jeremy_U[1]) ? Jeremy_U[1] : 0.0f;
+			actuators.control[actuator_controls_s::INDEX_YAW] = PX4_ISFINITE(Jeremy_U[2]) ? Jeremy_U[2] : 0.0f;
+			actuators.control[actuator_controls_s::INDEX_THROTTLE] = PX4_ISFINITE(Jeremy_U[3]) ? Jeremy_U[3] : 0.0f;
+
+			actuators.control[actuator_controls_s::INDEX_FLAPS] = PX4_ISFINITE(Jeremy_M[0]) ? Jeremy_M[0] : 0.0f;
+			actuators.control[actuator_controls_s::INDEX_SPOILERS] = PX4_ISFINITE(Jeremy_M[1]) ? Jeremy_M[1] : 0.0f;
+			actuators.control[actuator_controls_s::INDEX_AIRBRAKES] = PX4_ISFINITE(Jeremy_M[2]) ? Jeremy_M[2] : 0.0f;
+			actuators.control[actuator_controls_s::INDEX_LANDING_GEAR] = PX4_ISFINITE(Jeremy_M[3]) ? Jeremy_M[3] : 0.0f;
 			actuators.timestamp_sample = angular_velocity.timestamp_sample;
+
 
 			// scale effort by battery status if enabled
 			if (_param_mc_bat_scale_en.get()) {
