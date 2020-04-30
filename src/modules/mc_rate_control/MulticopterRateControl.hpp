@@ -168,7 +168,19 @@ private:
 
 		(ParamBool<px4::params::MC_BAT_SCALE_EN>) _param_mc_bat_scale_en,
 
-		(ParamInt<px4::params::CBRK_RATE_CTRL>) _param_cbrk_rate_ctrl
+		(ParamInt<px4::params::CBRK_RATE_CTRL>) _param_cbrk_rate_ctrl,
+
+		(ParamFloat<px4::params::MC_VP_INIT_PITCH>) _param_mc_vp_init_pitch,
+
+		(ParamFloat<px4::params::MC_VP_GAIN_ROLL>) _param_mc_vp_gain_roll,
+		(ParamFloat<px4::params::MC_VP_GAIN_PITCH>) _param_mc_vp_gain_pitch,
+		(ParamFloat<px4::params::MC_VP_GAIN_YAW>) _param_mc_vp_gain_yaw,
+		(ParamFloat<px4::params::MC_VP_GAIN_THR>) _param_mc_vp_gain_thr,
+
+		(ParamFloat<px4::params::MC_VP_OFFSET_P1>) _param_mc_vp_offset_p1,
+		(ParamFloat<px4::params::MC_VP_OFFSET_P2>) _param_mc_vp_offset_p2,
+		(ParamFloat<px4::params::MC_VP_OFFSET_P3>) _param_mc_vp_offset_p3,
+		(ParamFloat<px4::params::MC_VP_OFFSET_P4>) _param_mc_vp_offset_p4
 	)
 
 	matrix::Vector3f _acro_rate_max;	/**< max attitude rates in acro mode */

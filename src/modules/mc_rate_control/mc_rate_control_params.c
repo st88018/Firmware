@@ -395,3 +395,48 @@ PARAM_DEFINE_FLOAT(MC_ACRO_SUPEXPOY, 0.7f);
  * @group Multicopter Rate Control
  */
 PARAM_DEFINE_INT32(MC_BAT_SCALE_EN, 0);
+
+/**
+ * The initial pitch of four VP props
+ */
+PARAM_DEFINE_FLOAT(MC_VP_INIT_PITCH, 10.0f);
+
+/**
+ * The Pitch gain for VP
+ */
+PARAM_DEFINE_FLOAT(MC_VP_GAIN_PITCH, 10.0f);
+
+/**
+ * The Roll gain for VP
+ */
+PARAM_DEFINE_FLOAT(MC_VP_GAIN_ROLL, 10.0f);
+
+/**
+ * The Yaw gain for VP
+ */
+PARAM_DEFINE_FLOAT(MC_VP_GAIN_YAW, 10.0f);
+
+/**
+ * The Thrust gain for VP
+ */
+PARAM_DEFINE_FLOAT(MC_VP_GAIN_THR, 10.0f);
+
+/**
+ * Offset of Pitch 1
+ */
+PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P1, 0.0f);
+
+/**
+ * Offset of Pitch 2
+ */
+PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P2, 0.0f);
+
+/**
+ * Offset of Pitch 3
+ */
+PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P3, 0.0f);
+
+/**
+ * Offset of Pitch 4
+ */
+PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P4, 0.0f);
