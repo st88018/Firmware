@@ -143,6 +143,8 @@ px4_add_romfs_files(
 
 	24001_dodeca_cox
 
+	24002_vp_quadx
+
 	50000_generic_ground_vehicle
 	50001_axialracing_ax10
 	50002_traxxas_stampede_2wd

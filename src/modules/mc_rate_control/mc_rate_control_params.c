@@ -404,39 +404,51 @@ PARAM_DEFINE_FLOAT(MC_VP_INIT_PITCH, 10.0f);
 /**
  * The Pitch gain for VP
  */
-PARAM_DEFINE_FLOAT(MC_VP_GAIN_PITCH, 10.0f);
+PARAM_DEFINE_FLOAT(MC_VP_GAIN_PITCH, 0.0f);
 
 /**
  * The Roll gain for VP
  */
-PARAM_DEFINE_FLOAT(MC_VP_GAIN_ROLL, 10.0f);
+PARAM_DEFINE_FLOAT(MC_VP_GAIN_ROLL, 0.0f);
 
 /**
  * The Yaw gain for VP
  */
-PARAM_DEFINE_FLOAT(MC_VP_GAIN_YAW, 10.0f);
+PARAM_DEFINE_FLOAT(MC_VP_GAIN_YAW, 0.0f);
 
 /**
  * The Thrust gain for VP
  */
-PARAM_DEFINE_FLOAT(MC_VP_GAIN_THR, 10.0f);
+PARAM_DEFINE_FLOAT(MC_VP_GAIN_THR, 10);
 
 /**
- * Offset of Pitch 1
+ * Offset of Pitch 1 in degree
  */
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P1, 0.0f);
 
 /**
- * Offset of Pitch 2
+ * Offset of Pitch 2 in degree
  */
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P2, 0.0f);
 
 /**
- * Offset of Pitch 3
+ * Offset of Pitch 3 in degree
  */
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P3, 0.0f);
 
 /**
- * Offset of Pitch 4
+ * Offset of Pitch 4 in degree
  */
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P4, 0.0f);
+
+/**
+ * Maximum output pitch
+ */
+PARAM_DEFINE_FLOAT(MC_VP_PITCH_MAX, 15.0);
+
+/**
+ * Minimum output pitch
+ */
+PARAM_DEFINE_FLOAT(MC_VP_PITCH_MIN, -15.0);
+
+
