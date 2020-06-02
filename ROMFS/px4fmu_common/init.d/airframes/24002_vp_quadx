@@ -44,9 +44,10 @@ then
 	param set RTL_RETURN_ALT 30
 fi
 
-param set MC_VP_INIT_PITCH 20
-param set MC_VP_PITCH_MAX  30
-param set MC_VP_PITCH_MIN   5
+param set MC_VP_PITCH_MAX 30
+param set MC_VP_PITCH_MIN 5
+param set MC_VP_RPM_MAX 0.7
+param set COM_PREARM_MODE 0
 
 
 

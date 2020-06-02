@@ -274,7 +274,7 @@ MulticopterRateControl::Run()
 			rate_ctrl_status.timestamp = hrt_absolute_time();
 			_controller_status_pub.publish(rate_ctrl_status);
 
-			// publish actuator controls
+			// publish actuator controls  Original publisher
 			// actuator_controls_s actuators{};
 			// actuators.control[actuator_controls_s::INDEX_ROLL] = PX4_ISFINITE(att_control(0)) ? att_control(0) : 0.0f;
 			// actuators.control[actuator_controls_s::INDEX_PITCH] = PX4_ISFINITE(att_control(1)) ? att_control(1) : 0.0f;
@@ -305,7 +305,15 @@ MulticopterRateControl::Run()
 			float Jeremy_VP_pitch_MAX_MIN[2] = {_param_mc_vp_pitch_max.get(),
 			 			   	    _param_mc_vp_pitch_min.get()
 						   	  };
+
+			float Jeremy_VP_RPM_Protection_RPM = _param_mc_vp_rpm_max.get(); //Currently in 0~1
+			float Jeremy_VP_RP_MAP_SWITCH = _param_mc_vp_rp_map.get(); //Only 0 or 1
+
 			// Mixing Matrix
+
+
+
+
 			float Jeremy_QuadX[4][4] = {
 				{-0.5, 0.5, 0.5, 1},		//RF CCW 1
 				{ 0.5,-0.5, 0.5, 1},		//LB CCW 2
@@ -335,24 +343,32 @@ MulticopterRateControl::Run()
 				Jeremy_M[i] = (Jeremy_QuadX[i][0]*Original_U[0]
 					     + Jeremy_QuadX[i][1]*Original_U[1]
 				 	     + Jeremy_QuadX[i][2]*Original_U[2]
-					     + Jeremy_QuadX[i][3]*Original_U[3])*Jeremy_Initial_degree;
+					     + Jeremy_QuadX[i][3]*Original_U[3]);
 			}
-
-			// Minus degree not supported
+			// Tune the output RPM Minus degree not supported should be clamp to 0~1
 			for (int i = 0; i < 4; i++){
-				 Jeremy_M[i] = Jeremy_M[i]/Jeremy_Output_degree[i];
+				 Jeremy_M[i] = Jeremy_M[i]/Jeremy_Output_degree[i]*Jeremy_Initial_degree;
 			}
-
+			// Pitch servo offset
 			for (int i = 0; i < 4; i++){
 				Jeremy_Output_degree[i] = Jeremy_Output_degree[i]+Jeremy_VP_offset_pitch[i];
 			}
-
+			//Pitch Omega Mapping
+			if (double(Jeremy_VP_RP_MAP_SWITCH) > 0.5){
+				for (int i = 0; i<4; i++){
+					Jeremy_M[i] = 8.745*double(Jeremy_Output_degree[i])+474*double(Jeremy_M[i])+969.9;
+					Jeremy_M[i] = (Jeremy_M[i]-1000)/1000;
+				}
+			}
+			//Pitch Motor Clamp
+			for (int i = 0; i < 4; i++){
+				if(Jeremy_M[i] > Jeremy_VP_RPM_Protection_RPM){
+					Jeremy_M[i] = Jeremy_VP_RPM_Protection_RPM;}
+			}
 			//Output degree scaling  X~0~-X  0~0.5~1  1075~1512~1949 || 0.2~0.5  30~0
-			// float Jeremy_Output_degree_raw[4]= {Jeremy_Output_degree[0],Jeremy_Output_degree[1],Jeremy_Output_degree[2],Jeremy_Output_degree[3]};
 			for (int i = 0; i < 4; i++){
 				Jeremy_Output_degree[i] = double(0.5) - (double(Jeremy_Output_degree[i])*0.01);
 			}
-
 			// publish actuator controls  0~7
 			actuator_controls_s actuators{};
 			actuator_controls_s actuators1{};
@@ -365,16 +381,6 @@ MulticopterRateControl::Run()
 			actuators.control[actuator_controls_s::INDEX_SPOILERS] = PX4_ISFINITE(Jeremy_M[1]) ? Jeremy_M[1] : 0.0f;
 			actuators.control[actuator_controls_s::INDEX_AIRBRAKES] = PX4_ISFINITE(Jeremy_M[2]) ? Jeremy_M[2] : 0.0f;
 			actuators.control[actuator_controls_s::INDEX_LANDING_GEAR] = PX4_ISFINITE(Jeremy_M[3]) ? Jeremy_M[3] : 0.0f;
-
-			// actuators.control[actuator_controls_s::INDEX_ROLL] = 0.5;
-			// actuators.control[actuator_controls_s::INDEX_PITCH] = 0.5;
-			// actuators.control[actuator_controls_s::INDEX_YAW] = 0.5;
-			// actuators.control[actuator_controls_s::INDEX_THROTTLE] = 0.5;
-			// actuators.control[actuator_controls_s::INDEX_FLAPS] = 0.4;
-			// actuators.control[actuator_controls_s::INDEX_SPOILERS] = 0.4;
-			// actuators.control[actuator_controls_s::INDEX_AIRBRAKES] = 0.4;
-			// actuators.control[actuator_controls_s::INDEX_LANDING_GEAR] = 0.4;
-			// actuators.timestamp_sample = angular_velocity.timestamp_sample;
 
 			actuators1.control[actuator_controls_s::INDEX_ROLL] = PX4_ISFINITE(Jeremy_M[0]) ? Jeremy_M[0] : 0.0f;
 			actuators1.control[actuator_controls_s::INDEX_PITCH] = PX4_ISFINITE(Jeremy_M[1]) ? Jeremy_M[1] : 0.0f;

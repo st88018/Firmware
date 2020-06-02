@@ -184,7 +184,10 @@ private:
 		(ParamFloat<px4::params::MC_VP_OFFSET_P4>) _param_mc_vp_offset_p4,
 
 		(ParamFloat<px4::params::MC_VP_PITCH_MAX>) _param_mc_vp_pitch_max,
-		(ParamFloat<px4::params::MC_VP_PITCH_MIN>) _param_mc_vp_pitch_min
+		(ParamFloat<px4::params::MC_VP_PITCH_MIN>) _param_mc_vp_pitch_min,
+
+		(ParamFloat<px4::params::MC_VP_RPM_MAX>) _param_mc_vp_rpm_max,
+		(ParamFloat<px4::params::MC_VP_RP_MAP>) _param_mc_vp_rp_map
 	)
 
 	matrix::Vector3f _acro_rate_max;	/**< max attitude rates in acro mode */

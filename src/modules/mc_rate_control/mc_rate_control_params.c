@@ -449,6 +449,15 @@ PARAM_DEFINE_FLOAT(MC_VP_PITCH_MAX, 15.0);
 /**
  * Minimum output pitch
  */
-PARAM_DEFINE_FLOAT(MC_VP_PITCH_MIN, -15.0);
+PARAM_DEFINE_FLOAT(MC_VP_PITCH_MIN, 5.0);
 
+/**
+ * Maximum output RPM
+ */
+PARAM_DEFINE_FLOAT(MC_VP_RPM_MAX, 0.7);
+
+/**
+ * RPM_PITCH mapping switch 0 or 1
+ */
+PARAM_DEFINE_FLOAT(MC_VP_RP_MAP, 0);
 
