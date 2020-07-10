@@ -422,22 +422,22 @@ PARAM_DEFINE_FLOAT(MC_VP_GAIN_YAW, 0.0f);
 PARAM_DEFINE_FLOAT(MC_VP_GAIN_THR, 10);
 
 /**
- * Offset of Pitch 1 in pitch
+ * Offset of Pitch 1 in Actuator_Outputs 0~1
  */
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P1, 0.0f);
 
 /**
- * Offset of Pitch 2 in pitch
+ * Offset of Pitch 2 in Actuator_Outputs 0~1
  */
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P2, 0.0f);
 
 /**
- * Offset of Pitch 3 in pitch
+ * Offset of Pitch 3 in Actuator_Outputs 0~1
  */
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P3, 0.0f);
 
 /**
- * Offset of Pitch 4 in pitch
+ * Offset of Pitch 4 in Actuator_Outputs 0~1
  */
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P4, 0.0f);
 

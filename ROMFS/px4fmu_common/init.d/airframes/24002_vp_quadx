@@ -50,10 +50,10 @@ param set COM_PREARM_MODE 0
 param set MC_VP_PITCH_MAX 23
 param set MC_VP_PITCH_MIN -13
 
-param set MC_VP_OFFSET_P1 0
-param set MC_VP_OFFSET_P2 0
-param set MC_VP_OFFSET_P3 0
-param set MC_VP_OFFSET_P4 0
+param set MC_VP_OFFSET_P1  0.13043
+param set MC_VP_OFFSET_P2  0.14187
+param set MC_VP_OFFSET_P3 -0.02975
+param set MC_VP_OFFSET_P4  0.05034
 
 
 

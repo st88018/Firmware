@@ -346,10 +346,6 @@ MulticopterRateControl::Run()
 			for (int i = 0; i < 4; i++){
 				 Jeremy_M[i] = Jeremy_M[i]/labs(Jeremy_Output_degree[i])*Jeremy_Initial_degree;
 			}
-			// Pitch servo offset
-			for (int i = 0; i < 4; i++){
-				Jeremy_Output_degree[i] = Jeremy_Output_degree[i]+Jeremy_VP_offset_pitch[i];
-			}
 			//Pitch Omega Mapping turned off for secure on July/10/2020
 			if (double(Jeremy_VP_RP_MAP_SWITCH) > 0.5){
 				// for (int i = 0; i<4; i++){
@@ -366,10 +362,13 @@ MulticopterRateControl::Run()
 			for (int i = 0; i < 4; i++){
 				Jeremy_Output_degree[i] = double(0.5) - (double(Jeremy_Output_degree[i])*0.01);
 			}
+			// Pitch servo offset
+			for (int i = 0; i < 4; i++){
+				Jeremy_Output_degree[i] = Jeremy_Output_degree[i]+Jeremy_VP_offset_pitch[i];
+			}
 			// publish actuator controls  0~7
 			actuator_controls_s actuators{};
 			actuator_controls_s actuators1{};
-
 			actuators.control[actuator_controls_s::INDEX_ROLL] = PX4_ISFINITE(att_control(0)) ? att_control(0) : 0.0f;
 			actuators.control[actuator_controls_s::INDEX_PITCH] = PX4_ISFINITE(att_control(1)) ? att_control(1) : 0.0f;
 			actuators.control[actuator_controls_s::INDEX_YAW] = PX4_ISFINITE(att_control(2)) ? att_control(2) : 0.0f;
