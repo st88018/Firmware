@@ -306,7 +306,7 @@ MulticopterRateControl::Run()
 			 			   	    _param_mc_vp_pitch_min.get()
 						   	  };
 
-			// float Jeremy_VP_pitch2AccOut = _param_mc_vp_p2acc.get();
+			float Jeremy_VP_p2acc = _param_mc_vp_p2acc.get();
 
 			float Jeremy_VP_RPM_Protection_RPM = _param_mc_vp_rpm_max.get(); //Currently in 0~1
 			float Jeremy_VP_RP_MAP_SWITCH = _param_mc_vp_rp_map.get(); //Only 0 or 1
@@ -362,7 +362,7 @@ MulticopterRateControl::Run()
 			}
 			//Output degree scaling  X~0~-X  0~0.5~1  1075~1512~1949 || 23~0~-13  0.3135~0.5~0.60755
 			for (int i = 0; i < 4; i++){
-				Jeremy_Output_degree[i] = double(0.5) - (double(Jeremy_Output_degree[i])*0.01);
+				Jeremy_Output_degree[i] = double(0.5) - (double(Jeremy_Initial_degree-Jeremy_Output_degree[i])*double(Jeremy_VP_p2acc));
 			}
 			// Pitch servo offset
 			for (int i = 0; i < 4; i++){

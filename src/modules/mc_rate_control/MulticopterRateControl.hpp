@@ -185,7 +185,7 @@ private:
 
 		(ParamFloat<px4::params::MC_VP_PITCH_MAX>) _param_mc_vp_pitch_max,
 		(ParamFloat<px4::params::MC_VP_PITCH_MIN>) _param_mc_vp_pitch_min,
-		(ParamFloat<px4::params::MC_VP_P2Acc>) _param_mc_vp_p2acc,
+		(ParamFloat<px4::params::MC_VP_P2ACC>) _param_mc_vp_p2acc,
 
 
 		(ParamFloat<px4::params::MC_VP_RPM_MAX>) _param_mc_vp_rpm_max,
