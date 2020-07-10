@@ -30,9 +30,6 @@ if [ $AUTOCNF = yes ]
 then
 	param set NAV_ACC_RAD 2
 
-	param set PWM_AUX_DISARMED 1512
-	param set PWM_AUX_MIN 1075
-	param set PWM_AUX_MAX 1950
 	param set PWM_AUX_RATE 400
 
 	param set PWM_MIN 1075
@@ -50,12 +47,16 @@ param set COM_PREARM_MODE 0
 param set MC_VP_PITCH_MAX 23
 param set MC_VP_PITCH_MIN -13
 
+param set PWM_AUX_MIN 1350
+param set PWM_AUX_MAX 1750
+
 param set MC_VP_OFFSET_P1  0.13043
 param set MC_VP_OFFSET_P2  0.14187
 param set MC_VP_OFFSET_P3 -0.02975
 param set MC_VP_OFFSET_P4  0.05034
 
-param set MC_VP_P2ACC 7.21739
+param set PWM_AUX_DISARMED 1576
+param set MC_VP_P2ACC 0.0081
 
 
 
