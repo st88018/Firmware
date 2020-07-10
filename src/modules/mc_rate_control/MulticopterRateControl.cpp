@@ -296,13 +296,13 @@ MulticopterRateControl::Run()
 						   _param_mc_vp_gain_yaw.get(),
 						   _param_mc_vp_gain_thr.get()
 						   };
-			float Jeremy_VP_offset_pitch[4] = {_param_mc_vp_offset_p1.get(), //in PWM
+			float Jeremy_VP_offset_pitch[4] = {_param_mc_vp_offset_p1.get(),
 						   	   _param_mc_vp_offset_p2.get(),
 						   	   _param_mc_vp_offset_p3.get(),
 						   	   _param_mc_vp_offset_p4.get()
 						   	  };
 
-			float Jeremy_VP_pitch_MAX_MIN[2] = {_param_mc_vp_pitch_max.get(), //in PWM
+			float Jeremy_VP_pitch_MAX_MIN[2] = {_param_mc_vp_pitch_max.get(),
 			 			   	    _param_mc_vp_pitch_min.get()
 						   	  };
 
@@ -310,9 +310,6 @@ MulticopterRateControl::Run()
 			float Jeremy_VP_RP_MAP_SWITCH = _param_mc_vp_rp_map.get(); //Only 0 or 1
 
 			// Mixing Matrix
-
-
-
 
 			float Jeremy_QuadX[4][4] = {
 				{-0.5, 0.5, 0.5, 1},		//RF CCW 1
@@ -345,7 +342,7 @@ MulticopterRateControl::Run()
 				 	     + Jeremy_QuadX[i][2]*Original_U[2]
 					     + Jeremy_QuadX[i][3]*Original_U[3]);
 			}
-			// Tune the output RPM Minus degree not supported, added labs on 10/07/2020
+			// Tune the output RPM Minus degree not supported, added labs on July/10/2020
 			for (int i = 0; i < 4; i++){
 				 Jeremy_M[i] = Jeremy_M[i]/labs(Jeremy_Output_degree[i])*Jeremy_Initial_degree;
 			}
@@ -353,7 +350,7 @@ MulticopterRateControl::Run()
 			for (int i = 0; i < 4; i++){
 				Jeremy_Output_degree[i] = Jeremy_Output_degree[i]+Jeremy_VP_offset_pitch[i];
 			}
-			//Pitch Omega Mapping
+			//Pitch Omega Mapping turned off for secure on July/10/2020
 			if (double(Jeremy_VP_RP_MAP_SWITCH) > 0.5){
 				// for (int i = 0; i<4; i++){
 				// 	Jeremy_M[i] = 8.745*double(Jeremy_Output_degree[i])+474*double(Jeremy_M[i])+969.9;
