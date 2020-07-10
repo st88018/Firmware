@@ -362,7 +362,8 @@ MulticopterRateControl::Run()
 			}
 			//Output degree scaling  X~0~-X  0~0.5~1  1075~1512~1949 || 23~0~-13  0.3135~0.5~0.60755
 			for (int i = 0; i < 4; i++){
-				Jeremy_Output_degree[i] = double(0.5) - (double(Jeremy_Initial_degree-Jeremy_Output_degree[i])*double(Jeremy_VP_p2acc));
+				Jeremy_Output_degree[i] = double(0.5) - (double(Jeremy_Initial_degree-Jeremy_Output_degree[i])*double(Jeremy_VP_p2acc))
+								      - (double(Jeremy_Initial_degree)*double(Jeremy_VP_p2acc));
 			}
 			// Pitch servo offset
 			for (int i = 0; i < 4; i++){
