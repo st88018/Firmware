@@ -442,6 +442,11 @@ PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P3, 0.0f);
 PARAM_DEFINE_FLOAT(MC_VP_OFFSET_P4, 0.0f);
 
 /**
+ * Pitch to Actuator_Outputs Scale
+ */
+PARAM_DEFINE_FLOAT(MC_VP_P2Acc, 0.01);
+
+/**
  * Maximum output pitch
  */
 PARAM_DEFINE_FLOAT(MC_VP_PITCH_MAX, 15.0);

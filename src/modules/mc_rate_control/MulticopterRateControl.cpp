@@ -306,6 +306,8 @@ MulticopterRateControl::Run()
 			 			   	    _param_mc_vp_pitch_min.get()
 						   	  };
 
+			// float Jeremy_VP_pitch2AccOut = _param_mc_vp_p2acc.get();
+
 			float Jeremy_VP_RPM_Protection_RPM = _param_mc_vp_rpm_max.get(); //Currently in 0~1
 			float Jeremy_VP_RP_MAP_SWITCH = _param_mc_vp_rp_map.get(); //Only 0 or 1
 
