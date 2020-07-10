@@ -355,17 +355,17 @@ MulticopterRateControl::Run()
 			}
 			//Pitch Omega Mapping
 			if (double(Jeremy_VP_RP_MAP_SWITCH) > 0.5){
-				for (int i = 0; i<4; i++){
-					Jeremy_M[i] = 8.745*double(Jeremy_Output_degree[i])+474*double(Jeremy_M[i])+969.9;
-					Jeremy_M[i] = (Jeremy_M[i]-1000)/1000;
-				}
+				// for (int i = 0; i<4; i++){
+				// 	Jeremy_M[i] = 8.745*double(Jeremy_Output_degree[i])+474*double(Jeremy_M[i])+969.9;
+				// 	Jeremy_M[i] = (Jeremy_M[i]-1000)/1000;
+				// }
 			}
 			//Pitch Motor Clamp
 			for (int i = 0; i < 4; i++){
 				if(Jeremy_M[i] > Jeremy_VP_RPM_Protection_RPM){
 					Jeremy_M[i] = Jeremy_VP_RPM_Protection_RPM;}
 			}
-			//Output degree scaling  X~0~-X  0~0.5~1  1075~1512~1949 || 0.2~0.5  30~0
+			//Output degree scaling  X~0~-X  0~0.5~1  1075~1512~1949 || 23~0~-13  0.3135~0.5~0.60755
 			for (int i = 0; i < 4; i++){
 				Jeremy_Output_degree[i] = double(0.5) - (double(Jeremy_Output_degree[i])*0.01);
 			}
