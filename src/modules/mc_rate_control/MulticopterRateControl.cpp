@@ -345,9 +345,9 @@ MulticopterRateControl::Run()
 				 	     + Jeremy_QuadX[i][2]*Original_U[2]
 					     + Jeremy_QuadX[i][3]*Original_U[3]);
 			}
-			// Tune the output RPM Minus degree not supported should be clamp to 0~1
+			// Tune the output RPM Minus degree not supported, added labs on 10/07/2020
 			for (int i = 0; i < 4; i++){
-				 Jeremy_M[i] = Jeremy_M[i]/Jeremy_Output_degree[i]*Jeremy_Initial_degree;
+				 Jeremy_M[i] = Jeremy_M[i]/labs(Jeremy_Output_degree[i])*Jeremy_Initial_degree;
 			}
 			// Pitch servo offset
 			for (int i = 0; i < 4; i++){
