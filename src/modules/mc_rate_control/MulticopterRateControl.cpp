@@ -296,13 +296,13 @@ MulticopterRateControl::Run()
 						   _param_mc_vp_gain_yaw.get(),
 						   _param_mc_vp_gain_thr.get()
 						   };
-			float Jeremy_VP_offset_pitch[4] = {_param_mc_vp_offset_p1.get(),
+			float Jeremy_VP_offset_pitch[4] = {_param_mc_vp_offset_p1.get(), //in PWM
 						   	   _param_mc_vp_offset_p2.get(),
 						   	   _param_mc_vp_offset_p3.get(),
 						   	   _param_mc_vp_offset_p4.get()
 						   	  };
 
-			float Jeremy_VP_pitch_MAX_MIN[2] = {_param_mc_vp_pitch_max.get(),
+			float Jeremy_VP_pitch_MAX_MIN[2] = {_param_mc_vp_pitch_max.get(), //in PWM
 			 			   	    _param_mc_vp_pitch_min.get()
 						   	  };
 
@@ -333,7 +333,7 @@ MulticopterRateControl::Run()
 							 + Jeremy_QuadX[i][3]*Original_U[3]*Jeremy_VP_gain[3])
 							 + Jeremy_Initial_degree;
 			}
-			//Pitch Clamp + offset
+			//Pitch Clamp
 			for (int i = 0; i < 4; i++){
 				if(Jeremy_Output_degree[i] > Jeremy_VP_pitch_MAX_MIN[0]){Jeremy_Output_degree[i] = Jeremy_VP_pitch_MAX_MIN[0];}
 				if(Jeremy_Output_degree[i] < Jeremy_VP_pitch_MAX_MIN[1]){Jeremy_Output_degree[i] = Jeremy_VP_pitch_MAX_MIN[1];}
