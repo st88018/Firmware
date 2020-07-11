@@ -50,10 +50,10 @@ param set MC_VP_PITCH_MIN -14
 param set PWM_AUX_MIN 1250
 param set PWM_AUX_MAX 1750
 
-param set MC_VP_OFFSET_P1  0.118993135
-param set MC_VP_OFFSET_P2  0.131578947
-param set MC_VP_OFFSET_P3 -0.04576659
-param set MC_VP_OFFSET_P4  0.032036613
+param set MC_VP_OFFSET_P1  104
+param set MC_VP_OFFSET_P2  115
+param set MC_VP_OFFSET_P3 -40
+param set MC_VP_OFFSET_P4  0.032037
 
 param set PWM_AUX_DISARMED 1564
 param set MC_VP_P2ACC 0.0082

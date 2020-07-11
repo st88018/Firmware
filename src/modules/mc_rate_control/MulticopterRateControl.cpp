@@ -367,7 +367,7 @@ MulticopterRateControl::Run()
 			}
 			// Pitch servo offset
 			for (int i = 0; i < 4; i++){
-				Jeremy_Output_degree[i] = Jeremy_Output_degree[i]+Jeremy_VP_offset_pitch[i];
+				Jeremy_Output_degree[i] = Jeremy_Output_degree[i]+(Jeremy_VP_offset_pitch[i]/874);
 			}
 			// publish actuator controls  0~7
 			actuator_controls_s actuators{};
