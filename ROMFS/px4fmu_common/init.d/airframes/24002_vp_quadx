@@ -44,19 +44,19 @@ fi
 param set MC_VP_RPM_MAX 0.6
 param set COM_PREARM_MODE 0
 
-param set MC_VP_PITCH_MAX 23
-param set MC_VP_PITCH_MIN -13
+param set MC_VP_PITCH_MAX 24
+param set MC_VP_PITCH_MIN -14
 
-param set PWM_AUX_MIN 1350
+param set PWM_AUX_MIN 1250
 param set PWM_AUX_MAX 1750
 
-param set MC_VP_OFFSET_P1  0.13043
-param set MC_VP_OFFSET_P2  0.14187
-param set MC_VP_OFFSET_P3 -0.02975
-param set MC_VP_OFFSET_P4  0.05034
+param set MC_VP_OFFSET_P1  0.118993135
+param set MC_VP_OFFSET_P2  0.131578947
+param set MC_VP_OFFSET_P3 -0.04576659
+param set MC_VP_OFFSET_P4  0.032036613
 
-param set PWM_AUX_DISARMED 1576
-param set MC_VP_P2ACC 0.0081
+param set PWM_AUX_DISARMED 1564
+param set MC_VP_P2ACC 0.0082
 
 
 
